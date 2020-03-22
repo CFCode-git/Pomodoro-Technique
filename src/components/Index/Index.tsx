@@ -1,6 +1,25 @@
 import * as React from 'react';
-import {Button} from 'antd';
+import {Dropdown, Menu} from 'antd';
+import Todos from "../Todos/Todos";
+import {UserOutlined,DownOutlined} from '@ant-design/icons';
+import history from '../../config/history';
 import axios from '../../config/axios';
+import './Index.scss';
+
+
+const logout = () => {
+  localStorage.setItem('x-token', '');
+  history.push('login');
+};
+
+
+const menu = (
+  <Menu>
+    <Menu.Item key="1"><UserOutlined/>个人设置</Menu.Item>
+    <Menu.Item key="2" onClick={logout}><UserOutlined/>注销</Menu.Item>
+  </Menu>
+);
+
 
 interface IRouter {
   history: any;
@@ -28,17 +47,21 @@ class Index extends React.Component<IRouter, IIndexState> {
     this.setState({user: response.data});
   };
 
-  logout = () => {
-    localStorage.setItem('x-token', '');
-    this.props.history.push('login');
-  };
-
 
   render() {
     return (
-      <div className="Component">
-        <p>欢迎，{this.state.user && this.state.user.account}</p>
-        <Button onClick={this.logout}>注销用户</Button>
+      <div className="Index " id="index">
+        <header>
+          <span className="logo">LOGO</span>
+          <Dropdown overlay={menu}>
+            <span>
+              {this.state.user && this.state.user.account} <DownOutlined style={{marginLeft:2}}/>
+            </span>
+          </Dropdown>
+        </header>
+        <main>
+          <Todos/>
+        </main>
       </div>
     );
   }
