@@ -23,27 +23,26 @@ class SignUp extends React.Component<any, ISignUpState> {
     };
   }
 
-  onChangeAccount = (e) => {
-    this.setState({account: e.target.value});
-  };
-  onChangePassword = (e) => {
-    this.setState({password: e.target.value});
+
+  onChange = (key: keyof ISignUpState, value: string) => {
+    this.setState(() => {
+      const newState = {};
+      newState[key] = value;
+      return newState;
+    });
   };
 
-  onChangePasswordConformation = (e) => {
-    this.setState({passwordConformation: e.target.value});
-  };
 
   submit = async () => {
     const {account, password, passwordConformation} = this.state;
     try {
-      console.log(account, password, passwordConformation);
       await axios.post('sign_up/user', {
         account: account,
         password: password,
         password_confirmation: passwordConformation
       });
       console.log('成功');
+      this.props.history.push('/');
     } catch (e) {
       throw new Error(e);
     }
@@ -54,17 +53,17 @@ class SignUp extends React.Component<any, ISignUpState> {
     const {account, password, passwordConformation} = this.state;
     return (
       <div className="SignUp" id="SignUp">
-        <h1>欢迎使用番茄闹钟</h1>
+        <h1>注册</h1>
         <Input
           placeholder="请输入你的用户名"
           prefix={<UserOutlined className="site-form-item-icon"/>}
           value={account}
-          onChange={this.onChangeAccount}
+          onChange={e=>this.onChange('account',e.target.value)}
         />
-        <Input.Password value={password} placeholder="请输入密码" onChange={this.onChangePassword}/>
-        <Input.Password value={passwordConformation} placeholder="请确认密码" onChange={this.onChangePasswordConformation}/>
+        <Input.Password value={password} placeholder="请输入密码" onChange={e=>this.onChange('password',e.target.value)}/>
+        <Input.Password value={passwordConformation} placeholder="请确认密码" onChange={e=>this.onChange('passwordConformation',e.target.value)}/>
         <div className="buttonWrapper">
-          <Button type="primary" shape="round" className="loginButton" onClick={this.submit}>注册</Button>
+          <Button type="primary" shape="round" className="signUpButton" onClick={this.submit}>注册</Button>
           <p>如果你有账号，可以立即
             <Link to="/login"> 登录 </Link> 哦
           </p>
