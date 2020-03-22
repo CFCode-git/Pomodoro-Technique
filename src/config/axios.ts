@@ -1,4 +1,5 @@
 import axios from 'axios';
+import history from './history';
 
 const appID = 'gxd4HcnaxxFM64hcN4nJmawQ';
 const appSecret = 'uYmMu1oVickC7zdox6L7TLJ3';
@@ -35,7 +36,7 @@ instance.interceptors.response.use((response) => {
   return response;
 }, (error) => {
   if (error.response.status === 401) {
-    window.location.href = '/login';
+    history.push('/login')
   }
   return Promise.reject(error);
 });
