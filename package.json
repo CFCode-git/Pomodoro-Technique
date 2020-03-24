@@ -13,6 +13,7 @@
     "antd": "^4.0.3",
     "axios": "^0.19.2",
     "babel-plugin-import": "^1.13.0",
+    "classnames": "^2.2.6",
     "customize-cra": "^0.9.1",
     "dart-sass": "^1.25.0",
     "history": "^4.10.1",

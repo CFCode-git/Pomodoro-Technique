@@ -59,7 +59,6 @@ class Todos extends React.Component<any, ITodosState> {
 
   toEditing = (id: number) => {
     const {todos} = this.state;
-
     const newTodos = todos.map(t => {
       if (id === t.id) {
         return Object.assign({}, t, {editing: true});
@@ -70,20 +69,36 @@ class Todos extends React.Component<any, ITodosState> {
     this.setState({todos: newTodos});
   };
 
+  get unDeletedTodos(){
+    return this.state.todos.filter(t=>!t.deleted)
+  }
+
+  get unCompletedTodos(){
+    return this.unDeletedTodos.filter(t=>!t.completed)
+  }
+
+  get completedTodos(){
+    return this.unDeletedTodos.filter(t=>t.completed)
+  }
 
   public render() {
     return (
       <div className="Todos" id="Todos">
         <TodoInput addTodo={(params) => {this.addTodo(params);}}/>
-        <main>
+        <div className="todoList">
           {
-            this.state.todos.map(
+            this.unCompletedTodos.map(
               t => <TodoItem key={t.id} {...t}
                              update={this.updateTodo}
-                             toEditing={this.toEditing}
-              />)
+                             toEditing={this.toEditing}/>)
           }
-        </main>
+          {
+            this.completedTodos.map(
+              t => <TodoItem key={t.id} {...t}
+                             update={this.updateTodo}
+                             toEditing={this.toEditing}/>)
+          }
+        </div>
       </div>
     );
   }

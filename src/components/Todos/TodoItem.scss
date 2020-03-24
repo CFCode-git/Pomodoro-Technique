@@ -1,0 +1,60 @@
+#TodoItem{
+  display: flex;
+  padding:8px 0 8px 8px;
+  align-items:center;
+  border-bottom:1px solid #ddd;
+  &:hover{
+    background-color: #f9f9f9;
+    .text{
+      .anticon{
+        opacity:1;
+      }
+    }
+  }
+  &.editing{background-color: #fff3d2;}
+  &.completed{
+    .text{
+      text-decoration: line-through;
+      color:#a9a9a9;
+    }
+  }
+  &:first-child{
+    border-top:1px solid #ddd;
+  }
+  >.text{
+    flex:1;
+    padding:0 10px 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    >.anticon{
+      opacity:0;
+      transition:all .3s;
+      &:hover{
+        transform: scale(1.3);
+      }
+    }
+  }
+  >.editing{
+    width:100%;
+    padding:0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    >input{
+      border:0;
+      outline:none;
+      padding:0 0 0 10px;
+      background-color: transparent;
+    }
+    >.iconWrapper>.anticon{
+      padding: 0 10px 0 0;
+      transition:all .3s;
+      &:hover{
+        transform: scale(1.3);
+      }
+    }
+  }
+
+}
