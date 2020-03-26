@@ -1,4 +1,6 @@
 import * as React from 'react';
+import {connect} from 'react-redux';
+import {addTodo} from '../../redux/actions';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import axios from '../../config/axios';
@@ -69,22 +71,22 @@ class Todos extends React.Component<any, ITodosState> {
     this.setState({todos: newTodos});
   };
 
-  get unDeletedTodos(){
-    return this.state.todos.filter(t=>!t.deleted)
+  get unDeletedTodos() {
+    return this.state.todos.filter(t => !t.deleted);
   }
 
-  get unCompletedTodos(){
-    return this.unDeletedTodos.filter(t=>!t.completed)
+  get unCompletedTodos() {
+    return this.unDeletedTodos.filter(t => !t.completed);
   }
 
-  get completedTodos(){
-    return this.unDeletedTodos.filter(t=>t.completed)
+  get completedTodos() {
+    return this.unDeletedTodos.filter(t => t.completed);
   }
 
   public render() {
     return (
       <div className="Todos" id="Todos">
-        <TodoInput addTodo={(params) => {this.addTodo(params);}}/>
+        <TodoInput/>
         <div className="todoList">
           {
             this.unCompletedTodos.map(
@@ -104,7 +106,16 @@ class Todos extends React.Component<any, ITodosState> {
   }
 }
 
-export default Todos;
+const mapStateToProps = (state, ownProps) => ({
+  todos: state.todos,
+  ...ownProps
+});
+
+const mapDispatchToProps = {
+  addTodo
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Todos);
 
 
 
