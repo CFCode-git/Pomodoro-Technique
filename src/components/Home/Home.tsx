@@ -40,7 +40,7 @@ class Home extends React.Component<IRouter, IIndexState> {
   }
 
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     await this.getMe();
   }
 
