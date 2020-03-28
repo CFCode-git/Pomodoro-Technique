@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Button} from 'antd';
 import axios from '../../config/axios';
-import CountDown from './CountDown';
+// import CountDown from './CountDown';
+import CountDownHook from './CountDownHook';
 import {CloseCircleOutlined} from '@ant-design/icons';
-import {updateTomato} from '../../redux/actions/tomatoes';
 
 
 interface ITomatoActionProps {
@@ -29,6 +29,10 @@ class TomatoAction extends Component <ITomatoActionProps, ITomatoActionState> {
       this.addDescription();
     }
   };
+
+  onFinish=()=>{
+    this.render()
+}
 
   addDescription = async () => {
     try {
@@ -61,7 +65,7 @@ class TomatoAction extends Component <ITomatoActionProps, ITomatoActionState> {
         </div>;
       } else if (timeNow - startAt < duration) {
         let timer = duration - timeNow + startAt;
-        html = <CountDown timer={timer}/>;// 倒计时
+        html = <CountDownHook timer={timer} onFinish={this.onFinish}/>;// 倒计时
       }
     }
     return (
