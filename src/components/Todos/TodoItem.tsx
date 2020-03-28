@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Checkbox} from 'antd';
 import {connect} from 'react-redux';
-import {editTodo, updateTodo} from '../../redux/actions';
+import {editTodo, updateTodo} from '../../redux/actions/todos';
 import classNames from 'classnames';
 import './TodoItem.scss';
 import {
@@ -68,7 +68,6 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
   editTodo = () => {
     // if(timeId){clearTimeout(timeId)};
     this.props.editTodo(this.props.id);
-
   };
 
   onKeyUp = (e) => {
@@ -84,7 +83,6 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
                onChange={e => this.setState({editText: e.target.value})}
                onKeyUp={this.onKeyUp}
                ref={this.inputRef}
-
         />
         <div className="iconWrapper">
           <EnterOutlined onClick={() => this.updateTodo({description: this.state.editText})}/>

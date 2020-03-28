@@ -1,10 +1,12 @@
 import * as React from 'react';
 import {Dropdown, Menu} from 'antd';
-import Todos from "../Todos/Todos";
-import {UserOutlined,DownOutlined} from '@ant-design/icons';
+import Todos from '../Todos/Todos';
+import {UserOutlined, DownOutlined} from '@ant-design/icons';
 import history from '../../config/history';
 import axios from '../../config/axios';
 import './Home.scss';
+import '../Tomatoes/Tomatoes';
+import Tomatoes from '../Tomatoes/Tomatoes';
 
 
 const logout = () => {
@@ -53,13 +55,14 @@ class Home extends React.Component<IRouter, IIndexState> {
       <div className="Home" id="Home">
         <header>
           <span className="logo">LOGO</span>
-          <Dropdown overlay={menu}>
+          <Dropdown className="user" overlay={menu}>
             <span>
-              {this.state.user && this.state.user.account} <DownOutlined style={{marginLeft:2}}/>
+              {this.state.user && this.state.user.account} <DownOutlined style={{marginLeft: 2}}/>
             </span>
           </Dropdown>
         </header>
         <main>
+          <Tomatoes/>
           <Todos/>
         </main>
       </div>

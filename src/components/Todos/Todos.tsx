@@ -25,8 +25,6 @@ class Todos extends React.Component<any> {
     }
   };
 
-
-
   get unDeletedTodos() {
     return this.props.todos.filter(t => !t.deleted);
   }
