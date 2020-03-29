@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React from 'react';
 import {connect} from 'react-redux';
 import {initTodos, updateTodo} from '../../redux/actions/todos';
 import TodoInput from './TodoInput';

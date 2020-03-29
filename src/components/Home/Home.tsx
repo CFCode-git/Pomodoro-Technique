@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {Dropdown, Menu} from 'antd';
 import Todos from '../Todos/Todos';
 import {UserOutlined, DownOutlined} from '@ant-design/icons';

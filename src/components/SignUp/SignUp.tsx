@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {Input, Button} from 'antd';
 import {UserOutlined} from '@ant-design/icons';
 import axios from '../../config/axios';

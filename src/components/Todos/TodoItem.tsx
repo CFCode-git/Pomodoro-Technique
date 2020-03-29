@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {Checkbox} from 'antd';
 import {connect} from 'react-redux';
 import {editTodo, updateTodo} from '../../redux/actions/todos';
@@ -34,9 +34,7 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
     this.state = {
       editText: this.props.description
     };
-
   }
-
   private inputRef = React.createRef<HTMLInputElement>();
 
   componentDidUpdate() {
