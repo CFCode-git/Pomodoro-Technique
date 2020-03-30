@@ -1,4 +1,8 @@
 #Home{
+  .timerAndTodos{
+    display: flex;
+    align-items: stretch;
+  }
   max-width: 1000px;
   margin:0 auto;
   > header {
@@ -9,9 +13,15 @@
     border-bottom:1px solid #ddd;
     >.logo{
       cursor:default;
+      font-size:25px;
+      font-weight: 500;
     }
     >.user{
       cursor:pointer;
+      font-size: 16px;
+      >.username{
+        line-height: 1.5;
+      }
     }
   }
   >main{

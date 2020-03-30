@@ -71,7 +71,6 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = {
   addTomato,
   updateTomato,
-
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tomatoes);

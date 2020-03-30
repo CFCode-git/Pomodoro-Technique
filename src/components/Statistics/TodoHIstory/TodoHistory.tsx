@@ -22,17 +22,14 @@ class TodoHistory extends React.Component<ITodoHistoryProps> {
   get finishedTodos() {
     return this.props.todos.filter(t => t.completed && !t.deleted);
   }
-
   get deletedTodos() {
     return this.props.todos.filter(t => t.deleted);
   }
-
   get dailyFinishedTodos() {
     return _.groupBy(this.finishedTodos, (todo) => {
       return dayjs(todo.updated_at).format('YYYY-MM-D');
     });
   }
-
   get finishedDates() {
     return Object.keys(this.dailyFinishedTodos).sort((a, b) => Date.parse(b) - Date.parse(a));
   }
@@ -44,7 +41,7 @@ class TodoHistory extends React.Component<ITodoHistoryProps> {
           <div className="summary">
             <p className="date">
               <span>{dayjs(date).format('MM月D日')}</span>
-              <span>周五</span>
+              <span>{dayjs(date).format('dddd')}</span>
             </p>
             <p className="finishedCount">
               完成了{this.dailyFinishedTodos[date].length}个任务
