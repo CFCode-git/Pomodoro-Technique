@@ -1,6 +1,7 @@
 {
   "name": "pomodoro-technique",
   "version": "0.1.0",
+  "homepage": "https://CFCode-git.github.io/Pomodoro-Technique",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -30,6 +31,8 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
