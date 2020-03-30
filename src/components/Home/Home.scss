@@ -1,0 +1,29 @@
+#Home{
+  max-width: 1000px;
+  margin:0 auto;
+  > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:16px 0;
+    border-bottom:1px solid #ddd;
+    >.logo{
+      cursor:default;
+    }
+    >.user{
+      cursor:pointer;
+    }
+  }
+  >main{
+    padding:16px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+@media (min-width:500px){
+  #Home {
+    padding:0 30px;
+  }
+}
