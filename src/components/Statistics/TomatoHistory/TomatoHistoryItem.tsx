@@ -14,15 +14,19 @@ interface ITomatoHistoryItemProps {
 
 interface ITomatoHistoryItemState {
   editText: string
+  oldText:string
 }
 
 class TomatoHistoryItem extends React.Component <ITomatoHistoryItemProps, ITomatoHistoryItemState> {
   constructor(props) {
     super(props);
     this.state = {
-      editText: this.props.tomato.description
+      editText: this.props.tomato.description,
+      oldText:this.props.tomato.description
     };
   }
+  private inputRef = React.createRef<HTMLInputElement>()
+
 
   updateTomato = async (params: any) => {
     try {
@@ -36,6 +40,8 @@ class TomatoHistoryItem extends React.Component <ITomatoHistoryItemProps, ITomat
   onKeyUp = (e) => {
     if (e.keyCode === 13 && this.state.editText !== '') {
       this.updateTomato({description: this.state.editText});
+    }if(e.keyCode === 27 ){
+      this.updateTomato({description: this.state.oldText});
     }
   };
 
@@ -43,23 +49,24 @@ class TomatoHistoryItem extends React.Component <ITomatoHistoryItemProps, ITomat
     this.props.editTomato(this.props.tomato.id);
   };
 
-
+  componentDidUpdate() {
+    this.inputRef.current && this.inputRef.current.focus();
+  }
   render() {
     const Editing = (
       <div className="editing">
         <input type="text" value={this.state.editText}
                onChange={e => this.setState({editText: e.target.value})}
                onKeyUp={this.onKeyUp}
+               ref = {this.inputRef}
         />
-        <div>
-          <span onClick={() => this.updateTomato({description: this.state.editText})}>提交</span>
-        </div>
+        <span className="button" onClick={() => this.updateTomato({description: this.state.editText})}>提交</span>
       </div>
     );
 
     const Text = (
       <div className="action">
-      <span className="text" onDoubleClick={() => this.editTomato()}>
+      <span className="description" onDoubleClick={() => this.editTomato()}>
       {this.props.tomato.description}
     </span>
         {
@@ -69,30 +76,34 @@ class TomatoHistoryItem extends React.Component <ITomatoHistoryItemProps, ITomat
         }
       </div>);
 
-
     let action;
     let formatText;
     let time;
     if (this.props.itemType === 'finished') {
       formatText = 'HH:mm';
       time = this.props.tomato.updated_at;
-      action = this.props.tomato.editing ? Editing : Text;
+      action = (
+        <div className="finished">
+          <span className="time"> {dayjs(this.props.tomato.started_at).format(`${formatText}`)} - {dayjs(this.props.tomato.ended_at).format(`${formatText}`)} </span>
+          {this.props.tomato.editing ? Editing : Text}
+        </div>
+      );
     } else if (this.props.itemType === 'aborted') {
       formatText = 'YYYY-MM-DD';
       time = this.props.tomato.updated_at;
       action = (
-        <div>
-          {this.props.tomato.editing ? Editing : Text}
+        <div className="aborted">
+          <span className="time"> {dayjs(this.props.tomato.started_at).format(`${formatText}`)} </span>
+          {action = this.props.tomato.editing ? Editing : Text}
         </div>
       );
+
     }
+
 
     return (
       <div className="TomatoHistoryItem" id="TomatoHistoryItem">
         <div className="text">
-          <span className="time">
-            {dayjs(this.props.tomato.updated_at).format(`${formatText}`)}
-          </span>
           {action}
         </div>
       </div>

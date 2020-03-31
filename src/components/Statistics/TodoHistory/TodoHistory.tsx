@@ -35,13 +35,17 @@ class TodoHistory extends React.Component<ITodoHistoryProps> {
   }
 
   render() {
+    const weekdayFn = (weekday) => {
+      return (weekday === '0' ? '周日' : weekday === '1' ? '周一' : weekday === '2' ? '周二' :
+        weekday === '3' ? '周三' : weekday === '4' ? '周四' : weekday === '5' ? '周五' : '周六');
+    };
     const finishedTodoList = this.finishedDates.map(date => {
       return (
         <div key={date} className="dailyTodos">
           <div className="summary">
             <p className="date">
               <span>{dayjs(date).format('MM月D日')}</span>
-              <span>{dayjs(date).format('dddd')}</span>
+              <span>{weekdayFn(dayjs(date).format('d'))}</span>
             </p>
             <p className="finishedCount">
               完成了{this.dailyFinishedTodos[date].length}个任务

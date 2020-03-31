@@ -17,13 +17,14 @@ interface ITodoItemProps {
   description: string;
   completed: boolean;
   editing: boolean;
-  editTodo:(id:number)=>any;
-  updateTodo:(payload:any)=>any;
+  editTodo: (id: number) => any;
+  updateTodo: (payload: any) => any;
   onEditRange: () => void
 }
 
 interface ITodoItemState {
   editText: string
+  oldText: string
 }
 
 // let timeId;
@@ -32,9 +33,11 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
   constructor(props) {
     super(props);
     this.state = {
-      editText: this.props.description
+      editText: this.props.description,
+      oldText: this.props.description
     };
   }
+
   private inputRef = React.createRef<HTMLInputElement>();
 
   componentDidUpdate() {
@@ -54,9 +57,9 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
   //   }
   // };
 
-  updateTodo = async ( params: any) => {
-    if(params.completed){
-      params.completed_at = new Date()
+  updateTodo = async (params: any) => {
+    if (params.completed) {
+      params.completed_at = new Date();
     }
     try {
       const response = await axios.put(`todos/${this.props.id}`, params);
@@ -74,6 +77,8 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
   onKeyUp = (e) => {
     if (e.keyCode === 13 && this.state.editText !== '') {
       this.updateTodo({description: this.state.editText});
+    } else if (e.keyCode === 27) {
+      this.updateTodo({description: this.state.oldText});
     }
   };
 
@@ -121,7 +126,6 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
         <Checkbox checked={this.props.completed}
                   onChange={e => this.updateTodo({completed: e.target.checked})}
         />
-
         {this.props.editing ? Editing : Text}
       </div>
     );

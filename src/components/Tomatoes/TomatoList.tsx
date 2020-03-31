@@ -19,6 +19,8 @@ class TomatoList extends React.Component <ITomatoListProps> {
   constructor(props) {super(props);}
 
   get dates() {
+    // const thisday = dayjs(new Date()).date()
+    // const lastday = thisday - 2
     const dates = Object.keys(this.props.finishedTomatoes);
     return dates.sort((a, b) => Date.parse(b) - Date.parse(a)).splice(0, 3);
   }

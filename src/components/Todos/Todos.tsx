@@ -1,9 +1,13 @@
-import  React from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {updateTodo} from '../../redux/actions/todos';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import './Todos.scss';
+import {Collapse} from 'antd';
+import dayjs from 'dayjs';
+
+const {Panel} = Collapse;
 
 class Todos extends React.Component<any> {
   constructor(props) {
@@ -22,6 +26,9 @@ class Todos extends React.Component<any> {
     return this.unDeletedTodos.filter(t => t.completed);
   }
 
+  componentDidMount()  {
+
+  }
   public render() {
     return (
       <div className="Todos" id="Todos">
@@ -32,11 +39,16 @@ class Todos extends React.Component<any> {
               t => <TodoItem key={t.id} {...t}
               />)
           }
-          {/*{*/}
-          {/*  this.completedTodos.map(*/}
-          {/*    t => <TodoItem key={t.id} {...t}*/}
-          {/*    />)*/}
-          {/*}*/}
+          <Collapse bordered={false}>
+            <Panel header="今日完成任务" key="1">
+              {
+                this.completedTodos.filter(t=> dayjs(t.completed_at).isSame(dayjs(new Date()),'day')).map(
+                  t => {
+                    return <TodoItem key={t.id} {...t}/>;
+                  })
+              }
+            </Panel>
+          </Collapse>,
         </div>
       </div>
     );

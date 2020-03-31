@@ -4,7 +4,7 @@ import './Statistics.scss';
 import dayjs from 'dayjs';
 import _ from 'lodash';
 import Polygon from './Polygon';
-import TodoHistory from './TodoHIstory/TodoHistory';
+import TodoHistory from './TodoHistory/TodoHistory';
 import TomatoHistory from './TomatoHistory/TomatoHistory';
 
 enum View {
@@ -20,15 +20,21 @@ interface IStatisticsProps {
 
 interface IStatisticsState {
   view: string
+  polygonWidth: null | number
+  selected: string
 }
 
 class Statistics extends React.Component<IStatisticsProps, IStatisticsState> {
   constructor(props) {
     super(props);
     this.state = {
-      view : View.Tomatoes
+      view: View.Tomatoes,
+      polygonWidth: null,
+      selected: 'TomatoesHistory'
     };
   }
+
+  private polygonRef = React.createRef<HTMLDivElement>();
 
   get finishedTodos() {
     return this.props.todos.filter(t => t.completed && !t.deleted);
@@ -41,7 +47,6 @@ class Statistics extends React.Component<IStatisticsProps, IStatisticsState> {
   }
 
   get finishedTomatoes() {
-    console.log(this.props.tomatoes);
     return this.props.tomatoes.filter(t => t.description && t.ended_at && !t.aborted);
   }
 
@@ -51,35 +56,62 @@ class Statistics extends React.Component<IStatisticsProps, IStatisticsState> {
     });
   }
 
+  componentDidMount() {
+    this.handleResize();
+    window.addEventListener('resize', this.handleResize.bind(this)); //监听窗口大小改变
+  }
+
+  componentWillUnmount() { //一定要最后移除监听器，以防多个组件之间导致this的指向紊乱
+    window.removeEventListener('resize', this.handleResize.bind(this));
+  }
+
+  handleResize = () => {
+    this.setState({
+      polygonWidth: this.polygonRef.current && this.polygonRef.current.clientWidth
+    });
+  };
+
   render() {
-    let x;
+    let view;
     if (this.state.view === View.Todos) {
-      x = <TodoHistory/>;
+      view = <TodoHistory/>;
     } else if (this.state.view === View.Tomatoes) {
-      x = <TomatoHistory/>;
+      view = <TomatoHistory/>;
     } else if (this.state.view === View.Statistics) {
-      x = <p>statistics</p>;
+      view = <p>statistics</p>;
     }
+
     return (
       <div className="Statistics" id="Statistics">
-        <ul>
-          <li className="Statistics" onClick={() => this.setState({view: View.Statistics})}>
-            统计
+        <ul className="group">
+          <li className={this.state.selected === 'TomatoesHistory' ? 'active' : ''}
+              onClick={() => this.setState({view: View.Tomatoes, selected: 'TomatoesHistory'})}>
+            <div className="description">
+              <span className="title">番茄历史</span>
+              <span className="subtitle">累计完成番茄</span>
+              <span className="finishNumber">{this.finishedTomatoes.length}</span>
+            </div>
+            <div className="polygon" ref={this.polygonRef}>
+              <Polygon data={this.dailyTomatoes}
+                       totalFinishedCount={this.finishedTomatoes.length}
+                       polygonWidth={this.state.polygonWidth}/>
+            </div>
           </li>
-          <li className="TomatoHistory" onClick={() => this.setState({view: View.Tomatoes})}>
-            <span>番茄历史</span><br/>
-            <span>累计完成番茄</span><br/>
-            <span>{this.finishedTomatoes.length}</span>
-            <Polygon data={this.dailyTomatoes} totalFinishedCount={this.finishedTomatoes.length}/>
-          </li>
-          <li className="TodoHistory" onClick={() => this.setState({view: View.Todos})}>
-            <span>任务历史</span><br/>
-            <span>累计完成任务</span><br/>
-            <span>{this.finishedTodos.length}</span>
-            <Polygon data={this.dailyTodos} totalFinishedCount={this.finishedTodos.length}/>
+          <li className={this.state.selected === 'TodosHistory' ? 'active' : ''}
+            onClick={() => this.setState({view: View.Todos,selected:'TodosHistory'})}>
+            <div className="description">
+              <span className="title">任务历史</span>
+              <span className="subtitle">累计完成任务</span>
+              <span className="finishNumber">{this.finishedTodos.length}</span>
+            </div>
+            <div className="polygon">
+              <Polygon data={this.dailyTodos}
+                       totalFinishedCount={this.finishedTodos.length}
+                       polygonWidth={this.state.polygonWidth}/>
+            </div>
           </li>
         </ul>
-        {x}
+        {view}
       </div>
     );
   }

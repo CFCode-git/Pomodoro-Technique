@@ -51,13 +51,14 @@ class TomatoAction extends Component <ITomatoActionProps, ITomatoActionState> {
         this.abortTomato()
       },
       onCancel:()=> {
-        console.log('帮您取消番茄了哟');
+        console.log('加油呀!');
       },
     });
   }
 
   abortTomato =  () => {
-    this.updateTomato({aborted: true});
+    const abortedReason = window.prompt('请输入打断原因:') || '番茄被打断'
+    this.updateTomato({aborted: true,description:abortedReason});
     document.title = "Pomodoro番茄工作法";
   };
 

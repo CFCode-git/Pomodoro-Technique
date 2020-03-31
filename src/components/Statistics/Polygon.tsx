@@ -3,6 +3,7 @@ import React from 'react';
 interface IPolygonProps {
   data: any
   totalFinishedCount: number
+  polygonWidth:null | number
 }
 
 class Polygon extends React.Component<IPolygonProps> {
@@ -11,6 +12,8 @@ class Polygon extends React.Component<IPolygonProps> {
   }
 
   point = () => {
+    let {polygonWidth} = this.props
+    polygonWidth = polygonWidth === null ? 240 : polygonWidth
     const dates = Object.keys(this.props.data).sort((a, b) => {
       return Date.parse(a) - Date.parse(b);
     });
@@ -27,16 +30,17 @@ class Polygon extends React.Component<IPolygonProps> {
         finalY = y;
         return `${x},${y}`;
       });
-      return ['0,60', ...pointArray, `240,${finalY}`,'240,60'].join(' ');
+      return ['0,60', ...pointArray, `${polygonWidth},${finalY}`, `${polygonWidth},60`].join(' ');
     } else {
-      return '0,60 240,60';
+      return `0,60 ${polygonWidth},60`;
     }
   };
 
   render() {
+
     return (
       <div className="Polygon">
-        <svg>
+        <svg style={{width: '100%', height: '60'}}>
           <polygon fill="rgba(215,78,78,0.1)" stroke="rgba(215,78,78,0.5)" strokeWidth="1" points={this.point()}/>
         </svg>
       </div>

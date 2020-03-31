@@ -9,3 +9,12 @@
     margin-top:16px;
   }
 }
+@media (max-width: 600px) {
+  #Todos{
+    width:100%;
+    margin: 20px auto;
+    >.todoList{
+      margin-top:16px;
+    }
+  }
+}

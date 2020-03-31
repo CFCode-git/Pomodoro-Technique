@@ -30,7 +30,6 @@ class TomatoHistory extends React.Component<ITomatoHistoryProps> {
     const x = _.groupBy(this.finishedTomatoes, (tomato) => {
       return dayjs(tomato.started_at).format('YYYY-MM-D');
     });
-    console.log(x);
     return x;
   }
 
@@ -40,25 +39,25 @@ class TomatoHistory extends React.Component<ITomatoHistoryProps> {
 
 
   render() {
-    console.log(this.finishedDates);
+    const weekdayFn = (weekday) => {
+      return (weekday === '0' ? '周日' : weekday === '1' ? '周一' : weekday === '2' ? '周二' :
+        weekday === '3' ? '周三' : weekday === '4' ? '周四' : weekday === '5' ? '周五' : '周六');
+    };
     const finishedTomatoList = this.finishedDates.map(date => {
       return (
         <div key={date} className="dailyTomatoes">
           <div className="summary">
             <p className="date">
-              <span>{dayjs(date).format('MM月D日')}</span>
-              <span>{dayjs(date).format('dddd')}</span>
+              <span className="date_time">{dayjs(date).format('MM月D日')}</span>
+              <span className="week_day">{weekdayFn(dayjs(date).format('d'))}</span>
             </p>
             <p className="finishedCount">
               完成了 {this.dailyFinishedTomatoes[date].length} 个番茄
-              总计 {this.dailyFinishedTomatoes[date].length * 25 / 60} 小时
+              总计 {(this.dailyFinishedTomatoes[date].length * 25 / 60).toFixed(2)} 小时
             </p>
           </div>
           <div className="tomatoList">
-            {
-              this.dailyFinishedTomatoes[date].map(tomato => <TomatoHistoryItem key={tomato.id} tomato={tomato}
-                                                                                itemType="finished"/>)
-            }
+            { this.dailyFinishedTomatoes[date].map(tomato => <TomatoHistoryItem key={tomato.id} tomato={tomato} itemType="finished"/>) }
           </div>
         </div>
       );
