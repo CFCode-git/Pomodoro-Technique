@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Pomodoro-Technique/static/css/main.e2974a70.chunk.css",
+    "main.css": "/Pomodoro-Technique/static/css/main.cc9199c0.chunk.css",
     "main.js": "/Pomodoro-Technique/static/js/main.f911be9b.chunk.js",
     "main.js.map": "/Pomodoro-Technique/static/js/main.f911be9b.chunk.js.map",
     "runtime-main.js": "/Pomodoro-Technique/static/js/runtime-main.b8a0e53a.js",
@@ -9,17 +9,17 @@
     "static/js/2.6e34e5f6.chunk.js": "/Pomodoro-Technique/static/js/2.6e34e5f6.chunk.js",
     "static/js/2.6e34e5f6.chunk.js.map": "/Pomodoro-Technique/static/js/2.6e34e5f6.chunk.js.map",
     "index.html": "/Pomodoro-Technique/index.html",
-    "precache-manifest.0eb8eab9841e6dfb00fffafae9f9eae5.js": "/Pomodoro-Technique/precache-manifest.0eb8eab9841e6dfb00fffafae9f9eae5.js",
+    "precache-manifest.d9c617310cbbfe07bd72d91b62e8bd51.js": "/Pomodoro-Technique/precache-manifest.d9c617310cbbfe07bd72d91b62e8bd51.js",
     "service-worker.js": "/Pomodoro-Technique/service-worker.js",
     "static/css/2.82555ba1.chunk.css.map": "/Pomodoro-Technique/static/css/2.82555ba1.chunk.css.map",
-    "static/css/main.e2974a70.chunk.css.map": "/Pomodoro-Technique/static/css/main.e2974a70.chunk.css.map",
+    "static/css/main.cc9199c0.chunk.css.map": "/Pomodoro-Technique/static/css/main.cc9199c0.chunk.css.map",
     "static/js/2.6e34e5f6.chunk.js.LICENSE.txt": "/Pomodoro-Technique/static/js/2.6e34e5f6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b8a0e53a.js",
     "static/css/2.82555ba1.chunk.css",
     "static/js/2.6e34e5f6.chunk.js",
-    "static/css/main.e2974a70.chunk.css",
+    "static/css/main.cc9199c0.chunk.css",
     "static/js/main.f911be9b.chunk.js"
   ]
 }
