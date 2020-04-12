@@ -41,6 +41,9 @@ class SignUp extends React.Component<any, ILoginState> {
       console.log('成功');
       this.props.history.push('/');
     } catch (e) {
+      window.alert('出错了')
+      console.log(e.message);
+      console.log('没有此用户')
       throw new Error(e);
     }
   };

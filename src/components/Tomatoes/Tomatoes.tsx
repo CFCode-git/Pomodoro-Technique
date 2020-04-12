@@ -18,9 +18,9 @@ interface ITomatoesProps {
 }
 
 class Tomatoes extends Component <ITomatoesProps> {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   get unfinishedTomato() {
     return this.props.tomatoes.filter(t => !t.description && !t.ended_at && !t.aborted)[0];

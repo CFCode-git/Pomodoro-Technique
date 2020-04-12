@@ -10,9 +10,9 @@ import dayjs from 'dayjs';
 const {Panel} = Collapse;
 
 class Todos extends React.Component<any> {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   get unDeletedTodos() {
     return this.props.todos.filter(t => !t.deleted);

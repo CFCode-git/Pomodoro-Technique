@@ -15,9 +15,9 @@ interface ITodoHistoryProps {
 
 
 class TodoHistory extends React.Component<ITodoHistoryProps> {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   get finishedTodos() {
     return this.props.todos.filter(t => t.completed && !t.deleted);

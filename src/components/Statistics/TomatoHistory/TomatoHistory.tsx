@@ -13,9 +13,9 @@ interface ITomatoHistoryProps {
 }
 
 class TomatoHistory extends React.Component<ITomatoHistoryProps> {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   get finishedTomatoes() {
 

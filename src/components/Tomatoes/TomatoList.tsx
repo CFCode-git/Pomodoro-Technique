@@ -16,7 +16,7 @@ const TomatoItem = function (props) {
 };
 
 class TomatoList extends React.Component <ITomatoListProps> {
-  constructor(props) {super(props);}
+  // constructor(props) {super(props);}
 
   get dates() {
     // const thisday = dayjs(new Date()).date()

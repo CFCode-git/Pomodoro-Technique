@@ -48,6 +48,7 @@ class TomatoAction extends Component <ITomatoActionProps, ITomatoActionState> {
       okText:'我不行了',
       cancelText:'继续坚持',
       onOk:()=> {
+        document.title = "Pomodoro番茄工作法";
         this.abortTomato()
       },
       onCancel:()=> {
@@ -57,9 +58,9 @@ class TomatoAction extends Component <ITomatoActionProps, ITomatoActionState> {
   }
 
   abortTomato =  () => {
+    document.title = "Pomodoro番茄工作法";
     const abortedReason = window.prompt('请输入打断原因:') || '番茄被打断'
     this.updateTomato({aborted: true,description:abortedReason});
-    document.title = "Pomodoro番茄工作法";
   };
 
   updateTomato = async (params: any) => {
@@ -75,6 +76,7 @@ class TomatoAction extends Component <ITomatoActionProps, ITomatoActionState> {
     let html = <div/>;
     if (this.props.unfinishedTomato === undefined) {
       html = <Button className="startTomatoButton" onClick={() => {this.props.startTomato();}}>开始番茄</Button>;
+      document.title = "Pomodoro番茄工作法";
     } else {
       const startAt = Date.parse(this.props.unfinishedTomato.started_at);
       const duration = this.props.unfinishedTomato.duration;

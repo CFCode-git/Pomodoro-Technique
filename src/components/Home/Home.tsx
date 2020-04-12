@@ -64,7 +64,6 @@ class Home extends React.Component<any, IIndexState> {
     this.setState({user: response.data});
   };
 
-
   render() {
     return (
       <div className="Home" id="Home">

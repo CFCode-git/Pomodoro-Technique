@@ -7,9 +7,9 @@ interface IPolygonProps {
 }
 
 class Polygon extends React.Component<IPolygonProps> {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   point = () => {
     let {polygonWidth} = this.props

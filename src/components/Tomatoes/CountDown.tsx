@@ -45,7 +45,8 @@ class CountDown extends React.Component<ICountDownProps, ICountDownState> {
   }
 
   render() {
-    const percent = 1 - this.state.countDown / this.props.duration;
+    // const percent = 1 - this.state.countDown / this.props.duration;
+    const percent = this.state.countDown / this.props.duration;
     return (
       <div className="CountDown" id="CountDown">
         <span className="restTime">{this.countDown}</span>

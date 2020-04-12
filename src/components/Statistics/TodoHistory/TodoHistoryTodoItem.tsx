@@ -12,9 +12,9 @@ interface ITodoHistoryTodoItemProps {
 }
 
 class TodoHistoryTodoItem extends React.Component<ITodoHistoryTodoItemProps> {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   updateTodo= async (params:any)=>{
     try{
@@ -28,10 +28,10 @@ class TodoHistoryTodoItem extends React.Component<ITodoHistoryTodoItemProps> {
   render() {
     let action;
     let formatText;
-    let time;
+    // let time;
     if (this.props.itemType === 'finished') {
       formatText = 'HH:mm';
-      time = this.props.todo.updated_at;
+      // time = this.props.todos.updated_at;
       action = (
         <div>
           <span onClick={()=>this.updateTodo({finished:false})}> 恢复 </span>
@@ -40,7 +40,7 @@ class TodoHistoryTodoItem extends React.Component<ITodoHistoryTodoItemProps> {
       );
     } else if (this.props.itemType === 'deleted') {
       formatText = 'YYYY-MM-DD';
-      time = this.props.todo.created_at;
+      // time = this.props.todos.created_at;
       action = (
         <div>
           <span onClick={()=>this.updateTodo({deleted:false})}> 恢复 </span>

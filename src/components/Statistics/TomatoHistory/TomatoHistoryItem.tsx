@@ -78,10 +78,10 @@ class TomatoHistoryItem extends React.Component <ITomatoHistoryItemProps, ITomat
 
     let action;
     let formatText;
-    let time;
+    // let time;
     if (this.props.itemType === 'finished') {
       formatText = 'HH:mm';
-      time = this.props.tomato.updated_at;
+      // time = this.props.tomato.updated_at;
       action = (
         <div className="finished">
           <span className="time"> {dayjs(this.props.tomato.started_at).format(`${formatText}`)} - {dayjs(this.props.tomato.ended_at).format(`${formatText}`)} </span>
@@ -90,7 +90,7 @@ class TomatoHistoryItem extends React.Component <ITomatoHistoryItemProps, ITomat
       );
     } else if (this.props.itemType === 'aborted') {
       formatText = 'YYYY-MM-DD';
-      time = this.props.tomato.updated_at;
+      // time = this.props.tomato.updated_at;
       action = (
         <div className="aborted">
           <span className="time"> {dayjs(this.props.tomato.started_at).format(`${formatText}`)} </span>
