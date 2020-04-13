@@ -7,7 +7,6 @@ const appSecret = 'uYmMu1oVickC7zdox6L7TLJ3';
 /* tslint:disable:no-string-literal */
 const instance = axios.create({
   baseURL: 'https://gp-server.hunger-valley.com/',
-  // timeout:1000,
   headers: {
     't-app-id': appID,
     't-app-secret': appSecret
@@ -36,7 +35,7 @@ instance.interceptors.response.use((response) => {
   return response;
 }, (error) => {
   if (error.response.status === 401) {
-    history.push('/login')
+    history.push('/login');
   }
   return Promise.reject(error);
 });

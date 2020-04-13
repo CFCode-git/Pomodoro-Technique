@@ -24,12 +24,24 @@ class SignUp extends React.Component<any, ISignUpState> {
   }
 
 
-  onChange = (key: keyof ISignUpState, value: string) => {
-    this.setState(() => {
-      const newState = {};
-      newState[key] = value;
-      return newState;
-    });
+  // onChange = (key: keyof ISignUpState, value: string) => {
+  //   this.setState(() => {
+  //     const newState = {};
+  //     newState[key] = value;
+  //     return newState;
+  //   });
+  // };
+
+  onChangeAccount = (e) => {
+    this.setState({account: e.target.value});
+  };
+
+  onChangePassword = (e) => {
+    this.setState({password: e.target.value});
+  };
+
+  onChangePasswordConformation = (e) => {
+    this.setState({passwordConformation: e.target.value});
   };
 
 
@@ -44,9 +56,9 @@ class SignUp extends React.Component<any, ISignUpState> {
       console.log('成功');
       this.props.history.push('/');
     } catch (e) {
-      window.alert('出错了')
-      console.log(e.message)
-      console.log('密码错误')
+      window.alert('出错了');
+      console.log(e.message);
+      console.log('密码错误');
       throw new Error(e);
     }
   };
@@ -61,10 +73,11 @@ class SignUp extends React.Component<any, ISignUpState> {
           placeholder="请输入你的用户名"
           prefix={<UserOutlined className="site-form-item-icon"/>}
           value={account}
-          onChange={e=>this.onChange('account',e.target.value)}
+          onChange={this.onChangeAccount}
         />
-        <Input.Password value={password} placeholder="请输入密码" onChange={e=>this.onChange('password',e.target.value)}/>
-        <Input.Password value={passwordConformation} placeholder="请确认密码" onChange={e=>this.onChange('passwordConformation',e.target.value)}/>
+        <Input.Password value={password} placeholder="请输入密码" onChange={this.onChangePassword}/>
+        <Input.Password value={passwordConformation} placeholder="请确认密码"
+                        onChange={this.onChangePasswordConformation}/>
         <div className="buttonWrapper">
           <Button type="primary" shape="round" className="signUpButton" onClick={this.submit}>注册</Button>
           <p>如果你有账号，可以立即

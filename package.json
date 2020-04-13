@@ -1,5 +1,6 @@
 {
   "name": "pomodoro-technique",
+  "homepage": "https://CFCode-git.github.io/Pomodoro-Technique",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

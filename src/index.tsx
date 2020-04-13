@@ -5,6 +5,7 @@ import store from './redux/store';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -13,4 +14,5 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-serviceWorker.unregister();
+serviceWorker.register();
+// registerServiceWorker();

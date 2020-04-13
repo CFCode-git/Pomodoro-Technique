@@ -48,7 +48,7 @@ class Todos extends React.Component<any> {
                   })
               }
             </Panel>
-          </Collapse>,
+          </Collapse>
         </div>
       </div>
     );
