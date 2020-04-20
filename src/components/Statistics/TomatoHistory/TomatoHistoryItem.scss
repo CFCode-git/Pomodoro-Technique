@@ -1,0 +1,84 @@
+#TomatoHistoryItem {
+  padding: 8px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+
+  .text {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .time {
+      color: #999;
+      min-width: 80px;
+      margin-right: 8px;
+    }
+
+    .finished, .aborted {
+      display: flex;
+      width: 100%;
+      padding-left: 14px;
+
+      .action {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        .description {
+          color: #222;
+        }
+
+        .button {
+          color: deepskyblue;
+          cursor: pointer;
+          opacity: 0;
+          transition: all .3s;
+        }
+      }
+
+      .editing {
+        width: 100%;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        > input {
+          border: 0;
+          outline: none;
+          background-color: transparent;
+        }
+        > .button {
+          color: deepskyblue;
+          cursor: pointer;
+          transition: all .3s;
+        }
+      }
+    }
+  }
+
+  &:hover {
+    background: #f4f4f4;
+    cursor: default;
+
+    .finished, .aborted {
+      .action {
+        .button {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 600px) {
+  #TomatoHistoryItem {
+    .text {
+      .finished, .aborted {
+        padding:0;
+      }
+    }
+  }
+}
+

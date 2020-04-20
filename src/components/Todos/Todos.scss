@@ -1,0 +1,20 @@
+#Todos{
+  padding:16px;
+  border:1px solid #ddd;
+  border-radius:4px;
+  width:calc(50% - 8px);
+  box-shadow:0 4px 0 rgba(255,255,255,.2);
+  background-color: #fff;
+  >.todoList{
+    margin-top:16px;
+  }
+}
+@media (max-width: 600px) {
+  #Todos{
+    width:100%;
+    margin: 20px auto;
+    >.todoList{
+      margin-top:16px;
+    }
+  }
+}
